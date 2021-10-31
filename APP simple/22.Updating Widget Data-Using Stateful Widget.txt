@@ -1,0 +1,112 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+    throw UnimplementedError();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    //print('Answer chosen!');
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
+
+    print(questionIndex);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    //Define a lists
+    var questions = [
+      'What \'s your favourite colour?',
+      'What \'s your favourite animal?',
+    ];
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ), //AppBar
+        body: Column(
+          children: [
+            Text(
+              questions[questionIndex],
+              //questions.elementAt(0),
+            ), // or questions[0];
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: answerQuestion,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+------------------------------------------stateless
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MyApp());
+}
+                                    //stateful- render ui from inside widget
+class MyApp extends StatelessWidget{ //stateless- render ui from outside widget
+  var questionIndex = 0;
+
+  void answerQuestion(){
+    //print('Answer chosen!..');
+    questionIndex = questionIndex +1;
+    print(questionIndex);
+  }
+      @override
+  Widget build(BuildContext context){
+
+    //define a list
+    var questions = [
+      'What\'s your favourite colour?',
+      'What\'s your favourite animal?',
+     ];
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ), //AppBar
+        body: Column(
+          children: [
+            Text(questions[questionIndex]
+            ),
+            RaisedButton(child: Text('Answer 1'), onPressed: answerQuestion,),
+            RaisedButton(child: Text('Answer 2'), onPressed: () => print('Answer 2 chosen!'),), //single statement
+            RaisedButton(child: Text('Answer 3'), onPressed: (){ //multiple statement
+              print('Answer 3 chosen!');
+              print('True! Nadh Cantik!!');
+            },),
+          ],
+        ),
+      ),
+    );
+  }
+}

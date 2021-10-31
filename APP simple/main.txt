@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+
+import './quiz.dart';
+import './result.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
+    throw UnimplementedError();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  //Define a lists
+  final _questions = const [
+    {
+      'questionText': 'What \'s your favourite colour?',
+      'answers': ['Black', 'Red', 'Green', 'Blue'],
+    },
+    {
+      'questionText': 'What \'s your favourite animal?',
+      'answers': ['Cat', 'Tiger', 'Lion', 'Rabbit'],
+    },
+    {
+      'questionText': 'Who \'s your favourite instructor?',
+      'answers': ['Alan', 'David', 'Richard', 'Steven'],
+    },
+  ];
+
+  var _questionIndex = 0;
+
+  void _answerQuestion() {
+    //print('Answer chosen!');
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+
+    print(_questionIndex);
+
+    if (_questionIndex < _questions.length) {
+      print('We have more quations..!');
+    } else {
+      print('No more questions');
+    }
+  }
+
+  @override
+  //Widget List<Map<String, Object>> question
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ), //AppBar
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(),
+      ),
+    );
+  }
+}

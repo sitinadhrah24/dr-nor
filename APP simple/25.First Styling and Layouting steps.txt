@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+class Question extends StatelessWidget {
+  final String questionText;
+
+  Question(this.questionText);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.all(10),
+      child: Text(
+        questionText,
+        style: TextStyle(fontSize: 28),
+        textAlign: TextAlign.center,
+      ),
+    );
+    // return Text(questionText);
+  }
+}
+
+---------------------------------------------------------
+main.dart
+
+
+import 'package:flutter/material.dart';
+
+import './question.dart';
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() { //create a state- attach state widget
+    // TODO: implement createState
+    return _MyAppState();
+    throw UnimplementedError();
+  }
+}
+
+class _MyAppState extends State<MyApp> { //state class - treat as a widget
+  var _questionIndex = 0;
+
+  void _answerQuestion() {  //_ = private
+    //print('Answer chosen!');
+    setState(() { //method to set a state
+      _questionIndex = _questionIndex + 1;
+    });
+
+    print(_questionIndex); //print in debug console
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    //Define a lists
+    var questions = [
+      'What \'s your favourite colour?',
+      'What \'s your favourite animal?',
+    ];
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ), //AppBar
+        body: Column(
+          children: [
+            Question(
+              questions[_questionIndex],
+              //questions.elementAt(0),
+            ), // or questions[0];
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: _answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: _answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: _answerQuestion,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
